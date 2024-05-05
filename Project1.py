@@ -20,8 +20,12 @@ import openai
 import tensorflow as tf
 from PIL import Image
 import numpy as np
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import img_to_array
+#rom tensorflow.keras.models import load_model
+#from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow import keras
+from keras.layers import Dense
+from keras.models import Sequential, load_model
+import tensorflow as tf
 openai.api_key = "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"
 from code.DiseaseModel import DiseaseModel
 from code.helper import prepare_symptoms_array
@@ -48,8 +52,8 @@ with st.sidebar:
                             'Disease Prediction',
                             'Heart Disease Prediction',
                             #'Hepatitis Mortality Predictor',
-                            'Parkinsons Prediction',
-                            'Parkison Prediction1',
+                            #'Parkinsons Prediction',
+                            'Parkison Prediction',
                             'Diabetes Prediction',
                             #'Diabetes Prediction',
                             # 'Plant Diesease Detection',
@@ -261,77 +265,77 @@ if (selected == 'Heart Disease Prediction'):
 #
 
 # Parkinsons Disease Prediction Page
-if (selected == "Parkinsons Prediction"):
-    # page title
-    st.title("Parkinson's Disease Prediction")
-    st.button("About", help="The Parkinson's Disease Prediction Predictor App is a valuable tool designed to assess the risk of Parkinson's disease in individuals. By utilizing advanced algorithms and inputting relevant information such as age, gender, family history, tremors, rigidity, bradykinesia, gait disturbances, and balance problems, the app generates a comprehensive analysis. It evaluates the collected data to provide an accurate prediction regarding the likelihood of developing Parkinson's disease. This empowers healthcare professionals to identify individuals at risk, facilitate early intervention, and optimize management strategies. The app aids in improving patient outcomes by enabling timely diagnosis and personalized treatment plans for Parkinson's disease. Datset Used : https://www.kaggle.com/datasets/vikasukani/parkinsons-disease-data-set")
-    image = Image.open('parkinsons-disease.jpg')
-    new_image = image.resize((800, 500))
-    st.image(new_image)
-    st.header("Just fill in the information below")
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        fo = st.text_input('MDVP: Fo(Hz)')
-    with col2:
-        fhi = st.text_input('MDVP: Fhi(Hz)')
-    with col3:
-        flo = st.text_input('MDVP: Flo(Hz)')
-    with col4:
-        Jitter_percent = st.text_input('MDVP: Jitter(%)')
+#if (selected == "Parkinsons Prediction"):
+ #   # page title
+  #  st.title("Parkinson's Disease Prediction")
+   # st.button("About", help="The Parkinson's Disease Prediction Predictor App is a valuable tool designed to assess the risk of Parkinson's disease in individuals. By utilizing advanced algorithms and inputting relevant information such as age, gender, family history, tremors, rigidity, bradykinesia, gait disturbances, and balance problems, the app generates a comprehensive analysis. It evaluates the collected data to provide an accurate prediction regarding the likelihood of developing Parkinson's disease. This empowers healthcare professionals to identify individuals at risk, facilitate early intervention, and optimize management strategies. The app aids in improving patient outcomes by enabling timely diagnosis and personalized treatment plans for Parkinson's disease. Datset Used : https://www.kaggle.com/datasets/vikasukani/parkinsons-disease-data-set")
+  #  image = Image.open('parkinsons-disease.jpg')
+   # new_image = image.resize((800, 500))
+    #st.image(new_image)
+    #st.header("Just fill in the information below")
+    #col1, col2, col3, col4 = st.columns(4)
+    #with col1:
+     #   fo = st.text_input('MDVP: Fo(Hz)')
+    #with col2:
+     #   fhi = st.text_input('MDVP: Fhi(Hz)')
+    #with col3:
+     #   flo = st.text_input('MDVP: Flo(Hz)')
+    #with col4:
+     #   Jitter_percent = st.text_input('MDVP: Jitter(%)')
 
-    with col1:
-        Jitter_Abs = st.text_input('MDVP: Jitter(Abs)')
-    with col2:
-        RAP = st.text_input('MDVP: RAP')
-    with col3:
-        PPQ = st.text_input('MDVP: PPQ')
-    with col4:
-        DDP = st.text_input('Jitter: DDP')
+   # with col1:
+    #    Jitter_Abs = st.text_input('MDVP: Jitter(Abs)')
+    #with col2:
+     #   RAP = st.text_input('MDVP: RAP')
+    #with col3:
+     #   PPQ = st.text_input('MDVP: PPQ')
+    #with col4:
+     #   DDP = st.text_input('Jitter: DDP')
 
-    with col1:
-        Shimmer = st.text_input('MDVP: Shimmer')
-    with col2:
-        Shimmer_dB = st.text_input('MDVP: Shimmer(dB)')
-    with col3:
-        APQ3 = st.text_input('Shimmer: APQ3')
-    with col4:
-        APQ5 = st.text_input('Shimmer: APQ5')
+  #  with col1:
+  #      Shimmer = st.text_input('MDVP: Shimmer')
+  #  with col2:
+   #     Shimmer_dB = st.text_input('MDVP: Shimmer(dB)')
+    #with col3:
+     #   APQ3 = st.text_input('Shimmer: APQ3')
+    #with col4:
+     #   APQ5 = st.text_input('Shimmer: APQ5')
 
-    with col1:
-        APQ = st.text_input('MDVP: APQ')
-    with col2:
-        DDA = st.text_input('Shimmer: DDA')
-    with col3:
-        NHR = st.text_input('NHR')
-    with col4:
-        HNR = st.text_input('HNR')
+   # with col1:
+    #    APQ = st.text_input('MDVP: APQ')
+   # with col2:
+    #    DDA = st.text_input('Shimmer: DDA')
+    #with col3:
+     #   NHR = st.text_input('NHR')
+    #with col4:
+     #   HNR = st.text_input('HNR')
 
-    with col1:
-        RPDE = st.text_input('RPDE')
-    with col2:
-        DFA = st.text_input('DFA')
-    with col3:
-        spread1 = st.text_input('spread1')
-    with col4:
-        spread2 = st.text_input('spread2')
+  #  with col1:
+   #     RPDE = st.text_input('RPDE')
+    #with col2:
+     #   DFA = st.text_input('DFA')
+    #with col3:
+     #   spread1 = st.text_input('spread1')
+    #with col4:
+     #   spread2 = st.text_input('spread2')
 
-    with col1:
-        D2 = st.text_input('D2')
-    with col2:
-        PPE = st.text_input('PPE')
+   # with col1:
+    #    D2 = st.text_input('D2')
+    #with col2:
+   #     PPE = st.text_input('PPE')
 
     # creating a button for Prediction
 
-    parkinsons_model = pickle.load(open(
-        'parkinsons_model.sav', 'rb'))
-    if st.button("Parkinson's Test Result"):
-        parkinsons_prediction = parkinsons_model.predict(
-            [[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ, DDP, Shimmer, Shimmer_dB, APQ3, APQ5, APQ, DDA, NHR, HNR, RPDE, DFA, spread1, spread2, D2, PPE]])
+   # parkinsons_model = pickle.load(open(
+    #    'parkinsons_model.sav', 'rb'))
+   # if st.button("Parkinson's Test Result"):
+      #  parkinsons_prediction = parkinsons_model.predict(
+      #      [[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ, DDP, Shimmer, Shimmer_dB, APQ3, APQ5, APQ, DDA, NHR, HNR, RPDE, DFA, spread1, spread2, D2, PPE]])
 
-        if (parkinsons_prediction[0] == 1):
-            st.warning("The person has Parkinson's disease")
-        else:
-            st.success("The person does Not have Parkinson's disease")
+      #  if (parkinsons_prediction[0] == 1):
+    #        st.warning("The person has Parkinson's disease")
+    #    else:
+       #     st.success("The person does Not have Parkinson's disease")
 
 #
 #  Done
@@ -791,7 +795,7 @@ if selected == 'Diabetes Prediction':  # pagetitle
 
 
 parkinson_model = joblib.load("models/parkinsons_model.sav")
-if selected == 'Parkison Prediction1':
+if selected == 'Parkison Prediction':
     st.title("Parkison prediction")
     image = Image.open('p1.jpg')
     st.image(image, caption='parkinsons disease')
