@@ -1,5 +1,5 @@
 # Multiple-disease-Predictor 
-( WebApp Link : https://multiple-disease-prediction-app.streamlit.app/ )
+( WebApp Link : https://multiple-disease-prediction-app.streamlit.app/](https://project1py-bd55wagfwkfaazevgn2icr.streamlit.app/ )
 
 **Short Description**
 Discover our groundbreaking web app! Predict diseases like heart disease, hepatitis mortality, Parkinson's disease, diabetes risk, pneumonia, and detect liver diseases. Engage with an AI doctor through our chatbot. Experience accurate predictions and personalized healthcare insights. Your health, our priority!
