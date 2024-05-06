@@ -26,7 +26,7 @@ from tensorflow import keras
 from keras.layers import Dense
 from keras.models import Sequential, load_model
 import tensorflow as tf
-openai.api_key = "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"
+#openai.api_key = "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"
 from code.DiseaseModel import DiseaseModel
 from code.helper import prepare_symptoms_array
 
