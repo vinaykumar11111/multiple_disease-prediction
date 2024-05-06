@@ -16,7 +16,7 @@ import PIL.Image
 import tensorflow as tf
 from streamlit_chat import message
 import os
-import openai
+#import openai
 import tensorflow as tf
 from PIL import Image
 import numpy as np
