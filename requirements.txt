@@ -65,4 +65,4 @@ streamlit-image-coordinates==0.1.5
 
 tensorflow==2.12.0
 ImageHash
-
+streamlit-chat==0.1.1
